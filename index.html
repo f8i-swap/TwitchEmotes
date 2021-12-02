@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Red+Hat+Text" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  </head>
+  <style>
+    @font-face {
+  font-family: 'Red Hat Text';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/redhattext/v6/RrQCbohi_ic6B3yVSzGBrMx6ZI_cy1A6Ok2ML7hwZr_QcLVF.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+body {
+  background-color: #323232;
+  font-family: Red Hat Text;
+}
+.container {
+  width: 476px;
+  margin: 120px auto 50px;
+  background-color: #3d3d3d;
+  padding: 0 20px 20px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.075);
+  -webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.075);
+  -moz-box-shadow: 0 2px 5px rgba(0,0,0,0.075);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
+
+.container2 {
+  width: 476px;
+  margin: 50px auto 50px;
+  background-color: #3d3d3d;
+  padding: 0 20px 20px;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.075);
+  -webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.075);
+  -moz-box-shadow: 0 2px 5px rgba(0,0,0,0.075);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align:center}
+
+
+.avatar-flip {
+  border-radius: 100px;
+  overflow: hidden;
+  height: 150px;
+  width: 150px;
+  position: relative;
+  object-fit: cover;
+  margin: auto;
+  top: -60px;
+  box-shadow: 0 0 0 13px #363636;
+  -webkit-box-shadow: 0 0 0 13px #363636;
+  -moz-box-shadow: 0 0 0 13px #363636;
+}
+h2 {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: white;
+}
+h4 {
+  font-size: 16px;
+  color: #00baff;
+  letter-spacing: 1px;
+  margin-bottom: 25px
+}
+
+
+main {
+ 
+  max-width: 1000px;
+  padding: 3rem 0 4rem;
+  margin: 2rem auto;
+
+}
+
+article {
+  max-width: 576px;
+  margin: auto;
+  padding: 2rem;
+  overflow-wrap: break-word;
+  background-color: #edebeb;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
+    </style>
+<body onload="loaddata()">
+<div class="container2">
+        <h1 style="font-family:'Red Hat Text'" id="title"></h1>
+<label id="stuff"></label>
+      </div>
+</body>
+<script>
+    async function loaddata(){
+let clientid = "naty2zwfp7vecaivuve8ef1hohh6bo"
+      
+      
+      var response2 = await fetch("https://api.twitch.tv/helix/users?login=" + window.location.href.split("?")[1], {
+  "headers": {
+    "accept": "application/vnd.twitchtv.v5+json",
+    "accept-language": "en-US,en;q=0.9,ko;q=0.8,en-GB;q=0.7",
+    "client-id": clientid
+  },
+  "method": "GET"
+});
+      
+    const data2 = await response2.json();
+    console.log(data2)
+      
+      
+      
+      var response3 = await fetch("https://api.twitch.tv/helix/chat/emotes/?broadcaster_id=" + data2.data[0].id, {
+  "headers": {
+    "accept": "application/vnd.twitchtv.v5+json",
+    "accept-language": "en-US,en;q=0.9,ko;q=0.8,en-GB;q=0.7",
+    "client-id": clientid
+  },
+  "method": "GET"
+});
+      
+      
+
+
+    const data3 = await response3.json();
+
+
+    var response = await fetch("https://api.twitch.tv/kraken/channels/" + data2.data[0].id, {
+  "headers": {
+    "accept": "application/vnd.twitchtv.v5+json",
+    "accept-language": "en-US,en;q=0.9,ko;q=0.8,en-GB;q=0.7",
+    "client-id": clientid
+  },
+  "method": "GET"
+});
+      let verified = ""
+    const data = await response.json();
+  if(data.broadcaster_type == "partner")
+    {
+        verified = "<i class=\"fa fa-check-circle\" style=\"font-size:17px;color:#00acee; margin-left:5px\"></i>"
+
+    }
+    
+
+    let result = ""
+
+    var i,j, temporary, chunk = 3;
+for (i = 0,j = data3.data.length; i < j; i += chunk) {
+    temporary = data3.data.slice(i, i + chunk);
+
+    result = result + "<br><br>"
+    for (let i = 0; i < temporary.length; i++) {
+      result = result + "<img style=\"vertical-align:middle; margin-left:20px\" src=\"" + temporary[i].images.url_1x + "\"><label style=\"vertical-align:middle; margin-left:5px; color:white; font-size:14px\">" + temporary[i].name + "</label>"
+    }
+    
+}
+    
+    document.getElementById("stuff").innerHTML = result.replace("<br><br>", "") + "<br><br>"
+        document.getElementById("title").innerHTML = "<br><h2 style=\"font-size:25px\"><b>" + data2.data[0].login + " has " + data3.data.length + " emotes.</b></h2>"
+
+    }
+    </script>
+</html>
