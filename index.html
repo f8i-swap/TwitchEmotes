@@ -45,19 +45,6 @@ body {
     text-align:center}
 
 
-.avatar-flip {
-  border-radius: 100px;
-  overflow: hidden;
-  height: 150px;
-  width: 150px;
-  position: relative;
-  object-fit: cover;
-  margin: auto;
-  top: -60px;
-  box-shadow: 0 0 0 13px #363636;
-  -webkit-box-shadow: 0 0 0 13px #363636;
-  -moz-box-shadow: 0 0 0 13px #363636;
-}
 h2 {
   font-size: 30px;
   font-weight: 600;
@@ -80,14 +67,6 @@ main {
 
 }
 
-article {
-  max-width: 576px;
-  margin: auto;
-  padding: 2rem;
-  overflow-wrap: break-word;
-  background-color: #edebeb;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
     </style>
 <body onload="loaddata()">
 <div class="container2">
@@ -97,7 +76,7 @@ article {
 </body>
 <script>
     async function loaddata(){
-let clientid = "naty2zwfp7vecaivuve8ef1hohh6bo"
+let clientid = "YOUR TWITCH CLIENT ID HERE"
       
       
       var response2 = await fetch("https://api.twitch.tv/helix/users?login=" + window.location.href.split("?")[1], {
